@@ -8,5 +8,13 @@ Use:
 
 run `node index.js`
 
+Optionally installation:
+
+run `sudo cp network-discovery /bin/network-discovery`
+
+`sudo network-discovery`
+
 ![Alt text](img/1.png?raw=true "Title")
 ![Alt text](img/2.png?raw=true "Title")
+
+
