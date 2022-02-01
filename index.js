@@ -122,7 +122,7 @@ async function findRaspberry() {
 
   bar1.stop();
 
-  console.log(resolvedVendors);
+  console.log(resolvedIps, resolvedMacs, resolvedVendors);
 }
 
 function discoverVendors(lookups, onProgress) {
