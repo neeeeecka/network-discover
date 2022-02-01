@@ -4,14 +4,6 @@ import cliProgress from "cli-progress";
 
 import Database from "./db.js";
 
-let data = {
-  current: {
-    pings: [],
-    lookup: [],
-    arped: [],
-  },
-};
-
 const database = new Database("./data.json");
 const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
