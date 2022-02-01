@@ -4,7 +4,12 @@ import cliProgress from "cli-progress";
 
 import Database from "./db.js";
 
-const database = new Database("./data.json");
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+//const database = new Database("./data.json");
 const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
 findRaspberry();
@@ -129,7 +134,7 @@ function discoverVendors(lookups, onProgress) {
   return new Promise((resolve, reject) => {
     const resolvedVendors = [];
 
-    readFile("./vendors.json", (err, buffer) => {
+    readFile(__dirname + "/vendors.json", (err, buffer) => {
       const vendors = JSON.parse(buffer.toString());
 
       vendors.forEach((vendor, i) => {
