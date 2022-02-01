@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/neeeeecka/raspberry/issues"
   },
-  "homepage": "https://github.com/neeeeecka/raspberry#readme"
+  "homepage": "https://github.com/neeeeecka/raspberry#readme",
+  "dependencies": {
+    "cli-progress": "^3.10.0"
+  }
 }

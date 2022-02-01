@@ -1,5 +1,7 @@
 import { open, close, readFile } from "fs";
 import { exec } from "child_process";
+import cliProgress from "cli-progress";
+
 import Database from "./db.js";
 
 let data = {
@@ -11,18 +13,19 @@ let data = {
 };
 
 const database = new Database("./data.json");
+const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
 findRaspberry();
 
 function ResolveAll(promises, onProgress) {
   return new Promise((resolve, reject) => {
     const resolved = [];
-    let finsihed = 0;
+    let finished = 0;
 
     const handleResult = () => {
-      finsihed++;
+      finished++;
       onProgress(finished / promises.length);
-      if (finsihed == promises.length) {
+      if (finished == promises.length) {
         resolve(resolved);
       }
     };
@@ -96,7 +99,9 @@ function arp(ip) {
   });
 }
 
-function progressBar(fraction) {}
+function progressBar(fraction) {
+  bar1.update(Math.ceil(fraction * 100));
+}
 
 async function findRaspberry() {
   const pings = [];
@@ -105,17 +110,25 @@ async function findRaspberry() {
   }
   console.log("Resolving ips...");
 
+  bar1.start(100, 0);
   const resolvedIps = await ResolveAll(pings, progressBar);
   const arps = [];
   resolvedIps.forEach((ip) => {
     arps.push(arp(ip));
   });
+  bar1.stop();
 
   console.log("Resolving macs...");
+
+  bar1.start(100, 0);
   const resolvedMacs = await ResolveAll(arps, progressBar);
+  bar1.stop();
 
   console.log("Discovering vendors...");
+  bar1.start(100, 0);
   const resolvedVendors = await discoverVendors(resolvedMacs, progressBar);
+
+  bar1.stop();
 
   console.log(resolvedVendors);
 }
