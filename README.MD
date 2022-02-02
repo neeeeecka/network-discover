@@ -10,9 +10,9 @@ run `node index.js`
 
 Optionally installation:
 
-run `sudo cp network-discovery /bin/network-discovery`
+run `sudo cp network-discover /bin/network-discover`
 
-`sudo network-discovery`
+`sudo network-discover`
 
 ![Alt text](img/1.png?raw=true "Title")
 ![Alt text](img/2.png?raw=true "Title")
